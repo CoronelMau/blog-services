@@ -1,5 +1,5 @@
 import UserSchema from '../Schemas/user.schema.js';
-import PostSchema from '../schemas/posts.schema.js';
+import PostSchema from '../schemas/post.schema.js';
 
 export default async function getUserPostController(req, res) {
   const { id } = req.params;
