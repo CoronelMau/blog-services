@@ -1,14 +1,16 @@
 import { Router } from 'express';
 import getUsersController from '../controllers/users.controller.js';
 import getProfileController from '../controllers/user-profile.controller.js';
+import getPostsController from '../controllers/posts.controller.js';
+import getUserPostController from '../controllers/user-post.controller.js';
 
 const router = Router();
 
 //Get routes
 router.get('/users', getUsersController);
 router.get('/profile/:id', getProfileController);
-router.get('/posts');
-router.get('/posts/:id');
+router.get('/posts', getPostsController);
+router.get('/posts/:id', getUserPostController);
 router.get('/comments');
 router.get('/likes');
 router.get('/follower/:id');
