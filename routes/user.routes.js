@@ -4,6 +4,7 @@ import getProfileController from '../controllers/user-profile.controller.js';
 import getPostsController from '../controllers/posts.controller.js';
 import getUserPostController from '../controllers/user-post.controller.js';
 import getPostCommentsController from '../controllers/post-comments.controller.js';
+import getPostLikesController from '../controllers/post-likes.controller.js';
 
 const router = Router();
 
@@ -11,9 +12,9 @@ const router = Router();
 router.get('/users', getUsersController);
 router.get('/profile/:id', getProfileController);
 router.get('/posts', getPostsController);
-router.get('/posts/:id', getUserPostController);
-router.get('/comments/:id', getPostCommentsController);
-router.get('/likes');
+router.get('/posts/:userId', getUserPostController);
+router.get('/comments/:postId', getPostCommentsController);
+router.get('/likes/:postId', getPostLikesController);
 router.get('/follower/:id');
 
 //Post routes
