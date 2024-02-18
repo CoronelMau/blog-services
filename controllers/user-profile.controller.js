@@ -1,9 +1,9 @@
-import User from '../Schemas/user.schema.js';
+import UserSchema from '../Schemas/user.schema.js';
 
 export default async function getProfileController(req, res) {
   const { id } = req.params;
 
-  const user = await User.findByPk(id);
+  const user = await UserSchema.findByPk(id);
 
   if (!user)
     return res.status(400).json({
@@ -15,7 +15,11 @@ export default async function getProfileController(req, res) {
       msg: `User with id ${id} was deleted`,
     });
 
-  res.send({
-    user,
+  const { username, email, url } = user;
+
+  return res.status(200).send({
+    username,
+    email,
+    url,
   });
 }

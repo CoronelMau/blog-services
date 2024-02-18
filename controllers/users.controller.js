@@ -8,7 +8,7 @@ export default async function getUsersController(req, res) {
       msg: 'Internal error, data not found',
     });
 
-  res.send({
+  return res.status(200).send({
     users,
   });
 }
