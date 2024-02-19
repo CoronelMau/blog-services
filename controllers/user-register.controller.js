@@ -5,9 +5,9 @@ import UserSchema from '../Schemas/user.schema.js';
 export default async function userRegisterController(req, res) {
   const { username, email, password } = req.body;
 
-  const isUserByEmail = await UserSchema.findOne({ where: { email } });
+  const existingUserByEmail = await UserSchema.findOne({ where: { email } });
 
-  if (isUserByEmail)
+  if (existingUserByEmail)
     return res.status(409).json({
       msg: 'Email already exists',
     });

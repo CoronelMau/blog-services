@@ -8,6 +8,7 @@ import getPostLikesController from '../controllers/post-likes.controller.js';
 import getFollowerController from '../controllers/follower.controller.js';
 import getPostController from '../controllers/post.controller.js';
 import userRegisterController from '../controllers/user-register.controller.js';
+import userLogInController from '../controllers/user-login.controller.js';
 
 const router = Router();
 
@@ -23,7 +24,7 @@ router.get('/follower/:followerId', getFollowerController);
 
 //Post routes
 router.post('/register', userRegisterController);
-router.post('/log-in');
+router.post('/log-in', userLogInController);
 router.post('/post');
 router.post('/comment');
 router.post('/like');
