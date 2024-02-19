@@ -10,11 +10,13 @@ import getPostController from '../controllers/post.controller.js';
 import userRegisterController from '../controllers/user-register.controller.js';
 import userLogInController from '../controllers/user-login.controller.js';
 
+import userJWTDTO from '../dto/user-jwt.dto.js';
+
 const router = Router();
 
 //Get routes
 router.get('/users', getUsersController);
-router.get('/profile/:id', getProfileController);
+router.get('/profile', userJWTDTO, getProfileController);
 router.get('/posts', getPostsController);
 router.get('/post/:id', getPostController);
 router.get('/posts/:userId', getUserPostController);
