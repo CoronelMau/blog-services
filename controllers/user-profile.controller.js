@@ -1,7 +1,7 @@
 import UserSchema from '../Schemas/user.schema.js';
 
 export default async function getProfileController(req, res) {
-  const { id } = req.params;
+  const { id } = req;
 
   const user = await UserSchema.findByPk(id);
 
