@@ -1,4 +1,6 @@
 import { Router } from 'express';
+
+//Controllers
 import getUsersController from '../controllers/users.controller.js';
 import getProfileController from '../controllers/user-profile.controller.js';
 import getPostsController from '../controllers/posts.controller.js';
@@ -9,9 +11,12 @@ import getFollowerController from '../controllers/follower.controller.js';
 import getPostController from '../controllers/post.controller.js';
 import userRegisterController from '../controllers/user-register.controller.js';
 import userLogInController from '../controllers/user-login.controller.js';
+import postRegisterController from '../controllers/post-register.controller.js';
 
+//Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
 
+//Router
 const router = Router();
 
 //Get routes
@@ -27,7 +32,7 @@ router.get('/follower/:followerId', getFollowerController);
 //Post routes
 router.post('/register', userRegisterController);
 router.post('/log-in', userLogInController);
-router.post('/post');
+router.post('/post', postRegisterController);
 router.post('/comment');
 router.post('/like');
 router.post('/follower');
