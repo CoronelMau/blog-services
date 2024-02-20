@@ -21,6 +21,7 @@ import userDeleteController from '../controllers/user-delete.controller.js';
 
 //Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
+import likeDeleteController from '../controllers/like-delete.controller.js';
 
 //Router
 const router = Router();
@@ -49,7 +50,7 @@ router.put('/update-pwd', userJWTDTO, passwordUpdateController);
 
 //Delete routes
 router.put('/user-delete', userJWTDTO, userDeleteController);
-router.delete('/like-delete');
+router.delete('/like-delete', userJWTDTO, likeDeleteController);
 router.delete('/follower-delete');
 
 export default router;
