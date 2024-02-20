@@ -12,6 +12,7 @@ import getPostController from '../controllers/post.controller.js';
 import userRegisterController from '../controllers/user-register.controller.js';
 import userLogInController from '../controllers/user-login.controller.js';
 import postRegisterController from '../controllers/post-register.controller.js';
+import commentRegisterController from '../controllers/comment-register.controller.js';
 
 //Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
@@ -33,7 +34,7 @@ router.get('/follower/:followerId', getFollowerController);
 router.post('/register', userRegisterController);
 router.post('/log-in', userLogInController);
 router.post('/post', postRegisterController);
-router.post('/comment');
+router.post('/comment', commentRegisterController);
 router.post('/like');
 router.post('/follower');
 
@@ -43,5 +44,6 @@ router.put('/update-profile');
 //Delete routes
 router.delete('user-delete');
 router.delete('like-delete');
+router.delete('follwer-delete');
 
 export default router;

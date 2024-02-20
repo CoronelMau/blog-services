@@ -6,11 +6,6 @@ import UserSchema from '../Schemas/user.schema.js';
 export default async function userLogInController(req, res) {
   const { email, password } = req.body;
 
-  if (!email || !password)
-    return res.status(400).json({
-      msg: 'Email and password are required',
-    });
-
   const existingUserByEmail = await UserSchema.findOne({ where: { email } });
   if (!existingUserByEmail)
     return res.status(401).json({
