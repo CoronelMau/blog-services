@@ -16,6 +16,7 @@ import commentRegisterController from '../controllers/comment-register.controlle
 import likeRegisterController from '../controllers/like-register.controller.js';
 import followerRegisterController from '../controllers/follower-register.controller.js';
 import userUpdateController from '../controllers/user-update.controller.js';
+import passwordUpdateController from '../controllers/pwd-update.controller.js';
 
 //Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
@@ -43,6 +44,7 @@ router.post('/follow', followerRegisterController);
 
 //Update routes
 router.put('/update-profile', userJWTDTO, userUpdateController);
+router.put('/update-pwd', userJWTDTO, passwordUpdateController);
 
 //Delete routes
 router.delete('user-delete');
