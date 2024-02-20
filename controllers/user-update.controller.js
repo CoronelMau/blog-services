@@ -12,7 +12,7 @@ export default async function userUpdateController(req, res) {
 
   existingUserById.url = url;
   existingUserById.username = username;
-  existingUserById.save();
+  await existingUserById.save();
 
   return res.status(200).json({
     msg: 'User updated!',
