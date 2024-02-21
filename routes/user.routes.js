@@ -40,10 +40,10 @@ router.get('/follower/:followerId', getFollowerController);
 //Post routes
 router.post('/register', userRegisterController);
 router.post('/log-in', userLogInController);
-router.post('/post', postRegisterController);
-router.post('/comment', commentRegisterController);
-router.post('/like', likeRegisterController);
-router.post('/follow', followerRegisterController);
+router.post('/post', userJWTDTO, postRegisterController);
+router.post('/comment', userJWTDTO, commentRegisterController);
+router.post('/like', userJWTDTO, likeRegisterController);
+router.post('/follow', userJWTDTO, followerRegisterController);
 
 //Update routes
 router.put('/update-profile', userJWTDTO, userUpdateController);

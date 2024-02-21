@@ -19,15 +19,15 @@ export default async function followerDeleteController(req, res) {
       msg: `User with id ${id} not found`,
     });
 
-  const follow = await FollowerSchema.findOne({
+  const existingFollow = await FollowerSchema.findOne({
     where: { follower_id: id, following_id },
   });
-  if (!follow)
+  if (!existingFollow)
     return res.status(401).json({
       msg: 'Follow not found',
     });
 
-  await follow.destroy();
+  await existingFollow.destroy();
 
   return res.status(200).json({
     msg: 'Follow deleted!',

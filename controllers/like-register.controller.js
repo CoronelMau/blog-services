@@ -3,18 +3,27 @@ import PostSchema from '../schemas/post.schema.js';
 import UserSchema from '../Schemas/user.schema.js';
 
 export default async function likeRegisterController(req, res) {
-  const { user_id, post_id } = req.body;
+  const { id } = req;
+  const { post_id } = req.body;
 
-  const user = await UserSchema.findOne({ where: { id: user_id } });
-  if (!user)
-    return res.status(409).json({
+  const existingUserById = await UserSchema.findByPk(id);
+  if (!existingUserById)
+    return res.status(404).json({
       msg: `User with id: ${user_id} does not exist`,
     });
 
-  const post = await PostSchema.findOne({ where: { id: post_id } });
-  if (!post)
-    return res.status(409).json({
+  const existingPostById = await PostSchema.findOne({ where: { id: post_id } });
+  if (!existingPostById)
+    return res.status(404).json({
       msg: `Post with id ${post_id} does not exist`,
+    });
+
+  const existingLikeInPost = await LikeSchema.findOne({
+    where: { user_id: id, post_id },
+  });
+  if (existingLikeInPost)
+    return res.status(403).json({
+      msg: 'Like already exists',
     });
 
   const like = new LikeSchema({ user_id, post_id });

@@ -2,15 +2,16 @@ import UserSchema from '../Schemas/user.schema.js';
 import PostSchema from '../schemas/post.schema.js';
 
 export default async function postRegisterController(req, res) {
-  const { url, text, user_id } = req.body;
+  const { id } = req;
+  const { url, text } = req.body;
 
-  const existingUserById = await UserSchema.findOne({ where: { id: user_id } });
+  const existingUserById = await UserSchema.findByPk(id);
   if (!existingUserById)
     return res.status(409).json({
-      msg: `User with id ${user_id}, not found`,
+      msg: `User with id ${id}, not found`,
     });
 
-  const post = new PostSchema({ url, text, user_id });
+  const post = new PostSchema({ url, text, user_id: id });
   await post.save();
 
   return res.status(200).json({

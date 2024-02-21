@@ -3,19 +3,19 @@ import UserSchema from '../Schemas/user.schema.js';
 export default async function getProfileController(req, res) {
   const { id } = req;
 
-  const user = await UserSchema.findByPk(id);
+  const existingUserById = await UserSchema.findByPk(id);
 
-  if (!user)
-    return res.status(400).json({
+  if (!existingUserById)
+    return res.status(404).json({
       msg: `User with id ${id} not found`,
     });
 
-  if (user.state === false)
-    return res.status(400).json({
+  if (existingUserById.state === false)
+    return res.status(401).json({
       msg: `User with id ${id} was deleted`,
     });
 
-  const { username, email, url } = user;
+  const { username, email, url } = existingUserById;
 
   return res.status(200).send({
     username,
