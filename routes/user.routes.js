@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import { check } from 'express-validator';
+
+import validateFields from '../helpers/validation.js';
 
 //Controllers
 import getUsersController from '../controllers/users.controller.js';
@@ -38,16 +41,76 @@ router.get('/likes/:postId', getPostLikesController);
 router.get('/follower/:followerId', getFollowerController);
 
 //Post routes
-router.post('/register', userRegisterController);
-router.post('/log-in', userLogInController);
-router.post('/post', userJWTDTO, postRegisterController);
-router.post('/comment', userJWTDTO, commentRegisterController);
+router.post(
+  '/register',
+  [
+    check('username', 'Username is required').not().isEmpty(),
+    check('password', 'Password must have at least 6 characters').isLength({
+      min: 6,
+    }),
+    check('email', 'Email is not valid').isEmail(),
+    validateFields,
+  ],
+  userRegisterController
+);
+router.post(
+  '/log-in',
+  [
+    check('email', 'Email is required').not().isEmpty(),
+    check('email').isEmail(),
+    check('password', 'Password must have at least 6 charachters').isLength({
+      min: 6,
+    }),
+    validateFields,
+  ],
+  userLogInController
+);
+router.post(
+  '/post',
+  userJWTDTO,
+  [
+    check('text', 'Text must have at least 1 character').isLength({
+      min: 1,
+    }),
+    validateFields,
+  ],
+  postRegisterController
+);
+router.post(
+  '/comment',
+  [
+    check('content', 'Content must have at least 1 character').isLength({
+      min: 1,
+    }),
+    validateFields,
+  ],
+  userJWTDTO,
+  commentRegisterController
+);
 router.post('/like', userJWTDTO, likeRegisterController);
 router.post('/follow', userJWTDTO, followerRegisterController);
 
 //Update routes
-router.put('/update-profile', userJWTDTO, userUpdateController);
-router.put('/update-pwd', userJWTDTO, passwordUpdateController);
+router.put(
+  '/update-profile',
+  userJWTDTO,
+  [check('username', 'Username is required').not().isEmpty(), validateFields],
+  userUpdateController
+);
+router.put(
+  '/update-pwd',
+  userJWTDTO,
+  [
+    check('oldPwd', 'Password must have at least 6 characters').isLength({
+      min: 6,
+    }),
+    check('newPwd', 'Password must have at least 6 characters').isLength({
+      min: 6,
+    }),
+    validateFields,
+  ],
+  passwordUpdateController
+);
 
 //Delete routes
 router.put('/user-delete', userJWTDTO, userDeleteController);
