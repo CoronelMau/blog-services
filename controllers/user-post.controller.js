@@ -4,9 +4,9 @@ import PostSchema from '../schemas/post.schema.js';
 export default async function getUserPostController(req, res) {
   const { userId } = req.params;
 
-  const user = await UserSchema.findByPk(userId);
+  const existingUserById = await UserSchema.findByPk(userId);
 
-  if (!user)
+  if (!existingUserById)
     return res.status(404).json({
       msg: `User with id ${userId} not found`,
     });
@@ -18,7 +18,7 @@ export default async function getUserPostController(req, res) {
       msg: `User with id: ${userId} does not have posts`,
     });
 
-  const { username } = user;
+  const { username } = existingUserById;
 
   return res.send({ username, userPosts });
 }
