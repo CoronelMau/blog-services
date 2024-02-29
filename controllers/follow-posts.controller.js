@@ -7,7 +7,7 @@ export default async function getFollowPostController(req, res) {
 
   const user = await UserSchema.findByPk(id);
   if (!user)
-    return res.status(401).json({
+    return res.status(409).json({
       msg: 'User not found',
     });
 
@@ -33,6 +33,8 @@ export default async function getFollowPostController(req, res) {
     where: { id: followingIds },
   });
 
+  const userPosts = await PostSchema.findAll({ where: { user_id: id } });
+
   const usernames = posterNames.map((poster) => poster.username);
 
   const postInfo = postsByFollowing.map((post) => {
@@ -43,5 +45,14 @@ export default async function getFollowPostController(req, res) {
     };
   });
 
-  return res.status(200).json(postInfo);
+  const allPosts = [
+    ...postInfo,
+    ...userPosts.map((post) => ({
+      user: user.username,
+      postId: post.id,
+      text: post.text,
+    })),
+  ];
+
+  return res.status(200).json(allPosts);
 }
