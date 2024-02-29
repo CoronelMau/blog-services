@@ -27,7 +27,7 @@ export default async function followerRegisterController(req, res) {
       msg: 'Follow already exists',
     });
 
-  const follow = new FollowerSchema({ follower_id, following_id });
+  const follow = new FollowerSchema({ follower_id: id, following_id });
   await follow.save();
 
   return res.status(200).json({

@@ -23,6 +23,7 @@ import passwordUpdateController from '../controllers/pwd-update.controller.js';
 import userDeleteController from '../controllers/user-delete.controller.js';
 import likeDeleteController from '../controllers/like-delete.controller.js';
 import followerDeleteController from '../controllers/follower-delete.controller.js';
+import getFollowPostController from '../controllers/follow-posts.controller.js';
 
 //Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
@@ -36,6 +37,7 @@ router.get('/profile', userJWTDTO, getProfileController);
 router.get('/posts', getPostsController);
 router.get('/post/:id', getPostController);
 router.get('/posts/:userId', getUserPostController);
+router.get('/follow-posts', userJWTDTO, getFollowPostController);
 router.get('/comments/:postId', getPostCommentsController);
 router.get('/likes/:postId', getPostLikesController);
 router.get('/follower/:followerId', getFollowerController);
