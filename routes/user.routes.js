@@ -116,7 +116,6 @@ router.put(
 
 //Delete routes
 router.put('/user-delete', userJWTDTO, userDeleteController);
-router.delete('/like-delete', userJWTDTO, likeDeleteController);
 router.delete('/follow-delete', userJWTDTO, followerDeleteController);
 
 export default router;
