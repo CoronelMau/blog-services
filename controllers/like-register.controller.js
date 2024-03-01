@@ -21,12 +21,15 @@ export default async function likeRegisterController(req, res) {
   const existingLikeInPost = await LikeSchema.findOne({
     where: { user_id: id, post_id },
   });
-  if (existingLikeInPost)
-    return res.status(403).json({
-      msg: 'Like already exists',
-    });
 
-  const like = new LikeSchema({ user_id, post_id });
+  if (existingLikeInPost) {
+    await existingLikeInPost.destroy();
+    return res.status(403).json({
+      msg: 'Like deleted',
+    });
+  }
+
+  const like = new LikeSchema({ user_id: id, post_id });
   await like.save();
 
   return res.status(200).json({
