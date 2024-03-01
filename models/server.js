@@ -1,8 +1,11 @@
 import express from 'express';
 import cors from 'cors';
+import http from 'http';
+import { Server as SocketServer } from 'socket.io';
 
 import db from '../db/connection.js';
 import router from '../routes/user.routes.js';
+import setupSocketEvents from '../controllers/socket.controller.js';
 
 export default class Server {
   constructor() {
@@ -13,6 +16,10 @@ export default class Server {
 
     this.middlewares();
     this.routes();
+
+    this.server = http.createServer(this.app);
+    this.io = new SocketServer(this.server);
+    setupSocketEvents(this.io);
   }
 
   middlewares() {
@@ -34,7 +41,7 @@ export default class Server {
   }
 
   listen() {
-    this.app.listen(this.port, () => {
+    this.server.listen(this.port, () => {
       console.log(`Listening in port ${this.port}`);
     });
   }

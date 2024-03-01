@@ -21,7 +21,6 @@ import followerRegisterController from '../controllers/follower-register.control
 import userUpdateController from '../controllers/user-update.controller.js';
 import passwordUpdateController from '../controllers/pwd-update.controller.js';
 import userDeleteController from '../controllers/user-delete.controller.js';
-import likeDeleteController from '../controllers/like-delete.controller.js';
 import followerDeleteController from '../controllers/follower-delete.controller.js';
 import getFollowPostController from '../controllers/follow-posts.controller.js';
 
@@ -89,7 +88,6 @@ router.post(
   userJWTDTO,
   commentRegisterController
 );
-router.post('/like', userJWTDTO, likeRegisterController);
 router.post('/follow', userJWTDTO, followerRegisterController);
 
 //Update routes

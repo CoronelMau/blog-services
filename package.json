@@ -18,6 +18,8 @@
     "express-validator": "^7.0.1",
     "jose": "^5.2.2",
     "pg": "^8.11.3",
-    "sequelize": "^6.37.0"
+    "sequelize": "^6.37.0",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   }
 }
