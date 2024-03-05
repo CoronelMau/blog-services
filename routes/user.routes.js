@@ -16,7 +16,6 @@ import userRegisterController from '../controllers/user-register.controller.js';
 import userLogInController from '../controllers/user-login.controller.js';
 import postRegisterController from '../controllers/post-register.controller.js';
 import commentRegisterController from '../controllers/comment-register.controller.js';
-import likeRegisterController from '../controllers/like-register.controller.js';
 import followerRegisterController from '../controllers/follower-register.controller.js';
 import userUpdateController from '../controllers/user-update.controller.js';
 import passwordUpdateController from '../controllers/pwd-update.controller.js';

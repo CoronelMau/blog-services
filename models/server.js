@@ -5,7 +5,7 @@ import { Server as SocketServer } from 'socket.io';
 
 import db from '../db/connection.js';
 import router from '../routes/user.routes.js';
-import setupSocketEvents from '../controllers/socket.controller.js';
+import socketEvents from '../controllers/socket.controller.js';
 
 export default class Server {
   constructor() {
@@ -19,7 +19,7 @@ export default class Server {
 
     this.server = http.createServer(this.app);
     this.io = new SocketServer(this.server);
-    setupSocketEvents(this.io);
+    socketEvents(this.io);
   }
 
   middlewares() {
