@@ -29,15 +29,21 @@ export default async function getFollowPostController(req, res) {
       msg: `User with id ${followingIds.following_id} does not have posts`,
     });
 
+  const sortedPostFollowers = postsByFollowing.sort(
+    (a, b) => b.createdAt - a.createdAt
+  );
+
   const posterNames = await UserSchema.findAll({
     where: { id: followingIds },
   });
 
   const userPosts = await PostSchema.findAll({ where: { user_id: id } });
 
+  const sortedUserPosts = userPosts.sort((a, b) => b.createdAt - a.createdAt);
+
   const usernames = posterNames.map((poster) => poster.username);
 
-  const postInfo = postsByFollowing.map((post) => {
+  const postInfo = sortedPostFollowers.map((post) => {
     return {
       user: usernames[followingIds.indexOf(post.user_id)],
       postId: post.id,
@@ -47,7 +53,7 @@ export default async function getFollowPostController(req, res) {
 
   const allPosts = [
     ...postInfo,
-    ...userPosts.map((post) => ({
+    ...sortedUserPosts.map((post) => ({
       user: user.username,
       postId: post.id,
       text: post.text,
