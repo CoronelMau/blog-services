@@ -22,6 +22,7 @@ import passwordUpdateController from '../controllers/pwd-update.controller.js';
 import userDeleteController from '../controllers/user-delete.controller.js';
 import followerDeleteController from '../controllers/follower-delete.controller.js';
 import getFollowPostController from '../controllers/follow-posts.controller.js';
+import profileSearchController from '../controllers/profile-search.controller.js';
 
 //Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
@@ -31,7 +32,7 @@ const router = Router();
 
 //Get routes
 router.get('/users', getUsersController);
-router.get('/profile', userJWTDTO, getProfileController);
+router.get('/profile/:id', getProfileController);
 router.get('/posts', getPostsController);
 router.get('/post/:id', getPostController);
 router.get('/posts/:userId', getUserPostController);
@@ -114,5 +115,8 @@ router.put(
 //Delete routes
 router.put('/user-delete', userJWTDTO, userDeleteController);
 router.delete('/follow-delete', userJWTDTO, followerDeleteController);
+
+//Search route
+router.search('/search-profile', profileSearchController);
 
 export default router;
