@@ -36,6 +36,7 @@ export default class Server {
       await db.authenticate();
       console.log('Database online');
     } catch (err) {
+      console.log('Cannot connect');
       console.error(err);
     }
   }

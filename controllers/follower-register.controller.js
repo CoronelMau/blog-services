@@ -5,6 +5,11 @@ export default async function followerRegisterController(req, res) {
   const { id } = req;
   const { following_id } = req.body;
 
+  if (id === following_id)
+    return res.status(401).json({
+      msg: 'Follower and following are the same',
+    });
+
   const followerExistsById = await UserSchema.findByPk(id);
   if (!followerExistsById)
     return res.status(409).json({
@@ -22,10 +27,12 @@ export default async function followerRegisterController(req, res) {
   const existingFollow = await FollowerSchema.findOne({
     where: { follower_id: id, following_id },
   });
-  if (existingFollow)
-    return res.status(403).json({
-      msg: 'Follow already exists',
+  if (existingFollow) {
+    await existingFollow.destroy();
+    return res.status(200).json({
+      msg: 'Follow deleted',
     });
+  }
 
   const follow = new FollowerSchema({ follower_id: id, following_id });
   await follow.save();
