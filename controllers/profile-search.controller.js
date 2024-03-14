@@ -1,7 +1,7 @@
 import UserSchema from '../Schemas/user.schema.js';
 
 export default async function profileSearchController(req, res) {
-  const { user } = req.body;
+  const { user } = req.params;
 
   const existingUserByUsername = await UserSchema.findAll({
     where: { username: user },
