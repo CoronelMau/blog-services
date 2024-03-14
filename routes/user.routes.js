@@ -117,6 +117,6 @@ router.put('/user-delete', userJWTDTO, userDeleteController);
 router.delete('/follow-delete', userJWTDTO, followerDeleteController);
 
 //Search route
-router.search('/search-profile', profileSearchController);
+router.search('/search-profile/:user', profileSearchController);
 
 export default router;
