@@ -44,6 +44,7 @@ export default async function getFollowPostController(req, res) {
               });
 
               return {
+                id: comment.id,
                 user: userComment.username,
                 content: comment.content,
               };
@@ -80,11 +81,12 @@ export default async function getFollowPostController(req, res) {
 
       const commentsData = await Promise.all(
         comments.map(async (comment) => {
-          const userComment = await UserSchema.findOne({
+          const userComment = await UserSchema.findAll({
             where: { id: comment.user_id },
           });
 
           return {
+            id: comment.id,
             user: userComment.username,
             content: comment.content,
           };
