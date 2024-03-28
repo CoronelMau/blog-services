@@ -24,6 +24,7 @@ import followerDeleteController from '../controllers/follower-delete.controller.
 import getFollowPostController from '../controllers/follow-posts.controller.js';
 import profileSearchController from '../controllers/profile-search.controller.js';
 import getUserDataController from '../controllers/user-data.controller.js';
+import profileImageUpdateController from '../controllers/profile-image.controller.js';
 
 //Data Transfer Objects
 import userJWTDTO from '../dto/user-jwt.dto.js';
@@ -68,17 +69,7 @@ router.post(
   ],
   userLogInController
 );
-router.post(
-  '/post',
-  userJWTDTO,
-  [
-    check('text', 'Text must have at least 1 character').isLength({
-      min: 1,
-    }),
-    validateFields,
-  ],
-  postRegisterController
-);
+router.post('/post', userJWTDTO, postRegisterController);
 router.post(
   '/comment',
   [
@@ -94,7 +85,7 @@ router.post('/follow', userJWTDTO, followerRegisterController);
 
 //Update routes
 router.put(
-  '/update-profile',
+  '/update-username',
   userJWTDTO,
   [check('username', 'Username is required').not().isEmpty(), validateFields],
   userUpdateController
@@ -113,6 +104,8 @@ router.put(
   ],
   passwordUpdateController
 );
+
+router.put('/update-profile-image', userJWTDTO, profileImageUpdateController);
 
 //Delete routes
 router.put('/user-delete', userJWTDTO, userDeleteController);

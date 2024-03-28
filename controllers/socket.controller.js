@@ -3,6 +3,7 @@ import { jwtVerify } from 'jose';
 import UserSchema from '../Schemas/user.schema.js';
 import PostSchema from '../schemas/post.schema.js';
 import LikeSchema from '../schemas/like.schema.js';
+import CommentSchema from '../schemas/comment.schema.js';
 
 export default function socketEvents(io) {
   io.on('connection', (socket) => {
