@@ -2,7 +2,7 @@ import UserSchema from '../Schemas/user.schema.js';
 
 export default async function userUpdateController(req, res) {
   const { id } = req;
-  const { url, username } = req.body;
+  const { username } = req.body;
 
   const existingUserById = await UserSchema.findByPk(id);
   if (!existingUserById)
@@ -10,7 +10,6 @@ export default async function userUpdateController(req, res) {
       msg: `User with id ${id} does not exist`,
     });
 
-  existingUserById.url = url;
   existingUserById.username = username;
   await existingUserById.save();
 

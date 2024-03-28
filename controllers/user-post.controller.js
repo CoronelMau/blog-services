@@ -15,11 +15,6 @@ export default async function getUserPostController(req, res) {
 
   const userPosts = await PostSchema.findAll({ where: { user_id: userId } });
 
-  if (userPosts.length === 0)
-    return res.status(404).json({
-      msg: `User with id: ${userId} does not have posts`,
-    });
-
   const postsWithDetails = await Promise.all(
     userPosts.map(async (post) => {
       const comments = await CommentSchema.findAll({
@@ -33,6 +28,7 @@ export default async function getUserPostController(req, res) {
           });
 
           return {
+            id: comment.id,
             user: userComment.username,
             content: comment.content,
           };
